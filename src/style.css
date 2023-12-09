@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+img,
+svg,
+picture {
+  @apply block max-w-full h-auto object-cover;
+}
+
+.container {
+  @apply max-w-6xl mx-auto px-6;
+}

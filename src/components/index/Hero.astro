@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import bannerImage from '../../assets/images/banner.jpeg';
+---
+
+<div class='h-screen w-full'>
+  <Image src={bannerImage} alt='Banner' class='block h-full w-full object-fill' />
+</div>
+
+<script>
+  const header = document.getElementById('header') as HTMLElement;
+  const banner = document.querySelector('.h-screen') as HTMLElement;
+
+  function setBannerHeight() {
+    banner.style.height = `${window.innerHeight - header.offsetHeight}px`;
+  }
+
+  window.addEventListener('resize', setBannerHeight);
+
+  window.addEventListener('load', setBannerHeight);
+</script>

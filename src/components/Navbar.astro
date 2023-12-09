@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import logoTransparent from '../assets/images/logo-transparent.png';
+
+import Link from './ui/Link.astro';
+---
+
+<header class='bg-white shadow-sm relative' id='header'>
+  <div class='container'>
+    <div class='flex h-20 w-full items-center px-4 md:px-6 justify-between'>
+      <a class='mr-6' href='#'>
+        <Image src={logoTransparent} alt='Company Name' class='h-16 w-auto' />
+        <span class='sr-only'>Company Name</span></a
+      >
+      <nav
+        aria-label='Main'
+        data-orientation='horizontal'
+        dir='ltr'
+        class='z-10 max-w-max flex-1 items-center justify-center flex'
+      >
+        <div>
+          <!-- Desktop Nav -->
+          <ul
+            data-orientation='horizontal'
+            class='group flex-1 list-none items-center justify-center space-x-1 hidden md:flex'
+            id='desktopNav'
+          >
+            <Link href='/'>Home</Link>
+            <Link href='#about'>About</Link>
+            <Link href='#features'>Features</Link>
+            <Link href='#footer'>Contact</Link>
+          </ul>
+          <!-- Mobile nav -->
+          <ul
+            data-orientation='vertical'
+            class='absolute top-[100%] left-0 w-full bg-white shadow-lg py-2 px-4 space-y-2 md:hidden hidden flex-col'
+            id='mobileNav'
+          >
+            <Link href='/'>Home</Link>
+            <Link href='#about'>About</Link>
+            <Link href='#services'>Services</Link>
+            <Link href='#contact'>Contact</Link>
+          </ul>
+          <!-- hamburger -->
+          <button
+            type='button'
+            class='p-2 -mr-2 transition duration-150 ease-in-out rounded-md md:hidden'
+            aria-label='Open menu'
+            aria-expanded='false'
+            id='hamburger'
+          >
+            <!-- Open Menu -->
+            <svg class='h-6 w-6 text-gray-500 group-hover:text-gray-900' stroke='currentColor' fill='none' viewBox='0 0 24 24'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'></path>
+            </svg>
+
+            <!-- Close Menu -->
+            <svg
+              class='h-6 w-6 text-gray-500 group-hover:text-gray-900 hidden'
+              stroke='currentColor'
+              fill='none'
+              viewBox='0 0 24 24'
+            >
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const hamburger = document.getElementById('hamburger') as HTMLButtonElement;
+  const mobileNav = document.getElementById('mobileNav') as HTMLUListElement;
+
+  hamburger.addEventListener('click', handleHamburgerClick);
+
+  function handleHamburgerClick() {
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    const openIcon = hamburger.querySelector('svg:first-child') as SVGElement;
+    const closeIcon = hamburger.querySelector('svg:last-child') as SVGElement;
+
+    if (isOpen) {
+      hamburger.setAttribute('aria-expanded', 'false');
+      openIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+
+      mobileNav.classList.add('hidden');
+      mobileNav.classList.remove('flex');
+    } else {
+      hamburger.setAttribute('aria-expanded', 'true');
+      openIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+      mobileNav.classList.add('flex');
+      mobileNav.classList.remove('hidden');
+    }
+  }
+
+  function resetNavAndHamburger() {
+    hamburger.setAttribute('aria-expanded', 'false');
+    const openIcon = hamburger.querySelector('svg:first-child') as SVGElement;
+    const closeIcon = hamburger.querySelector('svg:last-child') as SVGElement;
+    openIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
+    mobileNav.classList.add('hidden');
+    mobileNav.classList.remove('flex');
+  }
+
+  window.addEventListener('resize', resetNavAndHamburger);
+</script>

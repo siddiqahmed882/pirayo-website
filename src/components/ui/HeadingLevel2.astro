@@ -1,0 +1,11 @@
+---
+type Props = { title: string };
+
+const { title } = Astro.props as Props;
+---
+
+<h2 
+  class='text-5xl mb-6 font-bold text-gray-800 text-center'
+>
+  {title}
+</h2>

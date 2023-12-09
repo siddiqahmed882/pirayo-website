@@ -1,0 +1,63 @@
+---
+import Section from './ui/Section.astro';
+---
+
+<Section class='md:py-24 lg:py-32 bg-[#f9fafb]' id='downloadLinks'>
+  <div class='container'>
+    <div class='flex flex-col items-center justify-between md:space-x-6 text-center'>
+      <h1 class='text-3xl font-bold mb-6 tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none leading-tight'>
+        Ready to embark on a new era of commuting?
+      </h1>
+      <p class='mx-auto max-w-prose text-gray-600 text-lg md:text-lg mb-4 leading-relaxed'>
+        <span class='font-semibold text-gray-800'>Pirayo</span> is a new way to commute. It’s a new way to travel. It’s a new way
+        to live. Download the Pirayo app now and let your journey be as unique as you are.
+      </p>
+      <div class='flex gap-4'>
+        <a
+          class='inline-flex gap-2 items-center justify-center whitespace-nowrap rounded-md bg-gray-50 px-4 py-2 text-sm font-medium text-gray-800 shadow transition-colors hover:bg-gray-200/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50'
+          href='#'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            class='w-4 h-4 flex-shrink-0'
+          >
+            <path
+              d='M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z'
+            >
+            </path>
+            <path d='M10 2c1 .5 2 2 2 5'></path>
+          </svg>
+           App Store
+        </a>
+        <a
+          class='inline-flex gap-2 items-center justify-center whitespace-nowrap rounded-md bg-gray-800 text-gray-50 px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50'
+          href='#'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            class='w-4 h-4 flex-shrink-0'
+          >
+            <polygon points='5 3 19 12 5 21 5 3'></polygon>
+          </svg>
+           Google Play
+        </a>
+      </div>
+    </div>
+  </div>
+</Section>

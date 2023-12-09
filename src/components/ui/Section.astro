@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'section'> {
+  id: string;
+}
+
+const { class: classNames, id, ...attributes }: Props = Astro.props as Props;
+---
+
+<section class:list={[classNames, 'py-14']} id={id} {...attributes}>
+  <div class='container'>
+    <slot />
+  </div>
+</section>
