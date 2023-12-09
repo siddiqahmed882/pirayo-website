@@ -3,6 +3,13 @@ import { Image } from 'astro:assets';
 import logoTransparent from '../assets/images/logo-transparent.png';
 
 import Link from './ui/Link.astro';
+
+const navLinks = [
+  { href: '#', text: 'Home' },
+  { href: '#about', text: 'About' },
+  { href: '#features', text: 'Features' },
+  { href: '#footer', text: 'Contact' },
+];
 ---
 
 <header class='bg-white shadow-sm relative' id='header'>
@@ -25,10 +32,13 @@ import Link from './ui/Link.astro';
             class='group flex-1 list-none items-center justify-center space-x-1 hidden md:flex'
             id='desktopNav'
           >
-            <Link href='/'>Home</Link>
-            <Link href='#about'>About</Link>
-            <Link href='#features'>Features</Link>
-            <Link href='#footer'>Contact</Link>
+            {
+              navLinks.map((link) => (
+                <li>
+                  <Link href={link.href}>{link.text}</Link>
+                </li>
+              ))
+            }
           </ul>
           <!-- Mobile nav -->
           <ul
@@ -36,10 +46,13 @@ import Link from './ui/Link.astro';
             class='absolute top-[100%] left-0 w-full bg-white shadow-lg py-2 px-4 space-y-2 md:hidden hidden flex-col'
             id='mobileNav'
           >
-            <Link href='/'>Home</Link>
-            <Link href='#about'>About</Link>
-            <Link href='#services'>Services</Link>
-            <Link href='#contact'>Contact</Link>
+            {
+              navLinks.map((link) => (
+                <li>
+                  <Link href={link.href}>{link.text}</Link>
+                </li>
+              ))
+            }
           </ul>
           <!-- hamburger -->
           <button
@@ -71,6 +84,8 @@ import Link from './ui/Link.astro';
 </header>
 
 <script>
+  import { navigate } from 'astro:transitions/client';
+
   const hamburger = document.getElementById('hamburger') as HTMLButtonElement;
   const mobileNav = document.getElementById('mobileNav') as HTMLUListElement;
 
@@ -108,4 +123,30 @@ import Link from './ui/Link.astro';
   }
 
   window.addEventListener('resize', resetNavAndHamburger);
+
+  const mobileNavLinks = Array.from(mobileNav.querySelectorAll('a')) as HTMLAnchorElement[];
+
+  function handleNavLinkClick(e: Event) {
+    e.preventDefault();
+
+    // close hamburger and mobile nav if open
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      hamburger.setAttribute('aria-expanded', 'false');
+      const openIcon = hamburger.querySelector('svg:first-child') as SVGElement;
+      const closeIcon = hamburger.querySelector('svg:last-child') as SVGElement;
+      openIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+
+      mobileNav.classList.add('hidden');
+      mobileNav.classList.remove('flex');
+    }
+
+    const href = (e.target as HTMLAnchorElement).getAttribute('href') as string;
+    navigate(href);
+  }
+
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener('click', handleNavLinkClick);
+  });
 </script>

@@ -3,16 +3,17 @@ import { Image } from 'astro:assets';
 import bannerImage from '../../assets/images/banner.jpeg';
 ---
 
-<div class='h-screen w-full'>
-  <Image src={bannerImage} alt='Banner' class='block h-full w-full object-fill' />
+<div>
+  <Image src={bannerImage} alt='Banner' class='block w-full object-fill min-h-[50vh]' id='heroImage' />
 </div>
 
 <script>
   const header = document.getElementById('header') as HTMLElement;
-  const banner = document.querySelector('.h-screen') as HTMLElement;
+  const heroImage = document.getElementById('heroImage') as HTMLImageElement;
 
   function setBannerHeight() {
-    banner.style.height = `${window.innerHeight - header.offsetHeight}px`;
+    const headerHeight = header.offsetHeight;
+    heroImage.style.maxHeight = `calc(100vh - ${headerHeight}px)`;
   }
 
   window.addEventListener('resize', setBannerHeight);
